@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hostel Details - Hostello</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="nav-brand">
+      <img src="images/logo-white.svg" alt="Hostello" class="nav-logo">Host<span>ello</span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="explore.html">Explore</a></li>
+      <li><a href="search-by-city.html">Cities</a></li>
+      <li><a href="about.html">About</a></li>
+      <li id="navProfileLink" style="display:none"><a href="profile.html">My Profile</a></li>
+      <li id="navLoginLink"><a href="student-login.html" class="btn-nav">Login</a></li>
+      <li id="navLogoutLink" style="display:none"><a href="#" onclick="logoutStudent()" class="btn-nav">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div style="padding:2rem 1.5rem;max-width:1100px;margin:0 auto;">
+    <a href="explore.html" style="color:#4f46e5;text-decoration:none;font-size:0.9rem;font-weight:600;">← Back to Explore</a>
+  </div>
+
+  <div id="hostelDetail" style="max-width:1100px;margin:0 auto;padding:0 1.5rem 3rem;">
+    <p style="color:#64748b;">Loading hostel details...</p>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>updateNavForLogin(); loadHostelDetails();</script>
+</body>
+</html>

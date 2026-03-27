@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - Hostello</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="nav-brand">
+      <img src="images/logo-white.svg" alt="Hostello" class="nav-logo">Host<span>ello</span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="explore.html">Explore</a></li>
+      <li><a href="search-by-city.html">Cities</a></li>
+      <li><a href="profile.html" class="active">My Profile</a></li>
+      <li><a href="#" onclick="logoutStudent()" class="btn-nav">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="profile-page">
+    <div class="profile-header">
+      <div class="profile-avatar" id="profileAvatar">?</div>
+      <div>
+        <h1 id="profileName">Loading...</h1>
+        <p id="profileEmail">—</p>
+        <p id="profileCollege" style="color:#a5b4fc;margin-top:4px;">—</p>
+      </div>
+    </div>
+
+    <div class="profile-grid">
+      <!-- Edit Profile -->
+      <div class="profile-card">
+        <h2>✏️ Edit Profile</h2>
+        <form id="editProfileForm">
+          <div class="form-group">
+            <label for="editName">Full Name</label>
+            <input type="text" id="editName" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="editPhone">Phone Number</label>
+            <input type="tel" id="editPhone" placeholder="10-digit mobile number">
+          </div>
+          <div class="form-group">
+            <label for="editCollege">College / University</label>
+            <input type="text" id="editCollege" placeholder="Your college name">
+          </div>
+          <div class="form-group">
+            <label for="editEmail">Email Address</label>
+            <input type="email" id="editEmail" placeholder="your@email.com" disabled>
+            <span class="hint">Email cannot be changed</span>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;margin-top:0.5rem;">Save Changes</button>
+        </form>
+      </div>
+
+      <!-- Change Password -->
+      <div class="profile-card">
+        <h2>🔒 Change Password</h2>
+        <form id="changePasswordForm">
+          <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" id="currentPassword" placeholder="Enter current password" required>
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" placeholder="Minimum 6 characters" required>
+            <span class="hint">Use a strong password with letters and numbers</span>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input type="password" id="confirmPassword" placeholder="Re-enter new password" required>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;margin-top:0.5rem;">Update Password</button>
+        </form>
+      </div>
+
+      <!-- Payment Methods -->
+      <div class="profile-card">
+        <h2>💳 Payment Methods</h2>
+        <form id="paymentMethodsForm">
+          <div class="form-group">
+            <label for="profileCard">Debit / Credit Card Number</label>
+            <input type="text" id="profileCard" placeholder="16-digit card number" maxlength="16">
+            <span class="hint">Stored securely for faster checkout</span>
+          </div>
+          <div class="form-group">
+            <label for="profileUpi">UPI ID</label>
+            <input type="text" id="profileUpi" placeholder="e.g. yourname@upi">
+            <span class="hint">BHIM UPI or any UPI ID</span>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;margin-top:0.5rem;">Save Payment Methods</button>
+        </form>
+      </div>
+
+      <!-- My Bookings -->
+      <div class="profile-card">
+        <h2>📋 My Bookings</h2>
+        <div id="myBookings">
+          <p style="color:#64748b;font-size:0.9rem;">Loading your bookings...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>loadProfilePage();</script>
+</body>
+</html>

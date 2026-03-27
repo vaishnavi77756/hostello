@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Hostello</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="nav-brand">
+      <img src="images/logo-white.svg" alt="Hostello" class="nav-logo">Host<span>ello</span> <span style="font-size:0.75rem;background:rgba(255,255,255,0.15);padding:2px 8px;border-radius:50px;margin-left:8px;">Admin</span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="#" onclick="logout()">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="admin-layout">
+    <div class="admin-sidebar">
+      <h3>Dashboard</h3>
+      <button class="admin-nav-item active" onclick="showTab('overview', this)">📊 Overview</button>
+      <button class="admin-nav-item" onclick="showTab('payments', this)">💳 Payments</button>
+      <button class="admin-nav-item" onclick="showTab('students', this)">👨‍🎓 Students</button>
+      <button class="admin-nav-item" onclick="showTab('hostels', this)">🏠 Hostels</button>
+    </div>
+
+    <div class="admin-content">
+      <!-- Overview Tab -->
+      <div id="overviewTab" class="tab-content active">
+        <h2 style="margin-bottom:1.5rem;font-size:1.4rem;">Dashboard Overview</h2>
+        <div class="admin-stats">
+          <div class="stat-card">
+            <div class="stat-icon">👨‍🎓</div>
+            <div class="stat-label">Total Students</div>
+            <div class="stat-value" id="statStudents">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🏠</div>
+            <div class="stat-label">Total Hostels</div>
+            <div class="stat-value" id="statHostels">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📋</div>
+            <div class="stat-label">Total Bookings</div>
+            <div class="stat-value" id="statBookings">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💰</div>
+            <div class="stat-label">Total Revenue</div>
+            <div class="stat-value" id="statRevenue">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payments Tab -->
+      <div id="paymentsTab" class="tab-content">
+        <h2 style="margin-bottom:1.5rem;font-size:1.4rem;">Payment Records</h2>
+        <table class="data-table">
+          <thead>
+            <tr><th>ID</th><th>Student</th><th>Hostel</th><th>Amount</th><th>Method</th><th>Date</th><th>Status</th></tr>
+          </thead>
+          <tbody id="paymentsData"><tr><td colspan="7" style="text-align:center;color:#64748b;">Loading...</td></tr></tbody>
+        </table>
+      </div>
+
+      <!-- Students Tab -->
+      <div id="studentsTab" class="tab-content">
+        <h2 style="margin-bottom:1.5rem;font-size:1.4rem;">Registered Students</h2>
+        <table class="data-table">
+          <thead>
+            <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>College</th><th>Joined</th></tr>
+          </thead>
+          <tbody id="studentsData"><tr><td colspan="6" style="text-align:center;color:#64748b;">Loading...</td></tr></tbody>
+        </table>
+      </div>
+
+      <!-- Hostels Tab -->
+      <div id="hostelsTab" class="tab-content">
+        <h2 style="margin-bottom:1.5rem;font-size:1.4rem;">Hostel Listings</h2>
+        <table class="data-table">
+          <thead>
+            <tr><th>ID</th><th>Name</th><th>City</th><th>Price/mo</th><th>Rating</th><th>Bookings</th><th>Status</th></tr>
+          </thead>
+          <tbody id="hostelsData"><tr><td colspan="7" style="text-align:center;color:#64748b;">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+  <script>loadDashboard();</script>
+</body>
+</html>

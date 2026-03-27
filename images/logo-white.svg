@@ -1,0 +1,13 @@
+<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+  <!-- Building shape -->
+  <rect x="5" y="8" width="30" height="28" fill="white" rx="2"/>
+  
+  <!-- Windows -->
+  <rect x="9" y="12" width="6" height="6" fill="#2c3e50"/>
+  <rect x="25" y="12" width="6" height="6" fill="#2c3e50"/>
+  <rect x="9" y="20" width="6" height="6" fill="#2c3e50"/>
+  <rect x="25" y="20" width="6" height="6" fill="#2c3e50"/>
+  
+  <!-- Door -->
+  <rect x="17" y="28" width="6" height="8" fill="#2c3e50"/>
+</svg>

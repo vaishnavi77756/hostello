@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Hostello</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="nav-brand">
+      <img src="images/logo-white.svg" alt="Hostello" class="nav-logo">
+      Host<span>ello</span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="home.html" class="active">Home</a></li>
+      <li><a href="explore.html">Explore</a></li>
+      <li><a href="search-by-city.html">Cities</a></li>
+      <li><a href="about.html">About</a></li>
+      <li id="navProfileLink" style="display:none"><a href="profile.html">My Profile</a></li>
+      <li id="navLoginLink"><a href="student-login.html" class="btn-nav">Login</a></li>
+      <li id="navLogoutLink" style="display:none"><a href="#" onclick="logoutStudent()" class="btn-nav">Logout</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Find Your Perfect <span>Hostel</span></h1>
+    <p>Search thousands of verified hostels across cities in India</p>
+    <div class="search-bar">
+      <input type="text" id="quickSearch" placeholder="Search by city or hostel name...">
+      <button onclick="quickSearch()">🔍 Search</button>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2 class="section-title">Why Students Love Hostello</h2>
+    <p class="section-sub">Everything you need to find and book the perfect hostel</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🏠</div>
+        <h3>Wide Selection</h3>
+        <p>Thousands of verified hostels across 10+ cities in India</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Instant Booking</h3>
+        <p>Book your stay in just a few clicks, no waiting required</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Secure Payments</h3>
+        <p>Card, UPI, and QR code payments with full security</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✅</div>
+        <h3>Verified Hostels</h3>
+        <p>Every hostel is verified and reviewed by real students</p>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/main.js"></script>
+  <script>updateNavForLogin();</script>
+</body>
+</html>

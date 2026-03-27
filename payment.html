@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - Hostello</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="nav-brand">
+      <img src="images/logo-white.svg" alt="Hostello" class="nav-logo">Host<span>ello</span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="explore.html">Explore</a></li>
+      <li><a href="search-by-city.html">Cities</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <h1>Complete Payment</h1>
+    <p>Choose your preferred payment method</p>
+  </div>
+
+  <div class="payment-page">
+
+    <!-- Summary Card -->
+    <div class="payment-card">
+      <h2>🧾 Payment Summary</h2>
+      <div id="paymentSummary">
+        <p style="color:#64748b;">Loading booking details...</p>
+      </div>
+    </div>
+
+    <!-- Payment Methods Card -->
+    <div class="payment-card">
+      <h2>💳 Select Payment Method</h2>
+      <div class="payment-tabs">
+        <button class="tab-btn active" onclick="showPaymentMethod('card')">💳 Card</button>
+        <button class="tab-btn" onclick="showPaymentMethod('upi')">📱 BHIM UPI</button>
+        <button class="tab-btn" onclick="showPaymentMethod('qr')">📲 QR Code</button>
+      </div>
+
+      <!-- Card Payment -->
+      <div id="cardPayment" class="payment-method active">
+        <div class="payment-icon">💳</div>
+        <div class="form-group">
+          <label for="cardNumber">Card Number</label>
+          <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="16">
+          <span class="hint">Enter your 16-digit debit or credit card number</span>
+        </div>
+        <div class="form-group">
+          <label for="cardName">Cardholder Name</label>
+          <input type="text" id="cardName" placeholder="Name as on card">
+          <span class="hint">Exactly as printed on your card</span>
+        </div>
+        <div class="card-row">
+          <div class="form-group">
+            <label for="cardExpiry">Expiry Date</label>
+            <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+          </div>
+          <div class="form-group">
+            <label for="cardCvv">CVV</label>
+            <input type="text" id="cardCvv" placeholder="3-digit code" maxlength="3">
+            <span class="hint">Back of your card</span>
+          </div>
+        </div>
+        <button onclick="processPayment('card')" class="btn-primary" style="width:100%;padding:1rem;font-size:1rem;">Pay Now 🔒</button>
+      </div>
+
+      <!-- UPI Payment -->
+      <div id="upiPayment" class="payment-method">
+        <div class="payment-icon">📱</div>
+        <div class="form-group">
+          <label for="upiId">UPI ID</label>
+          <input type="text" id="upiId" placeholder="yourname@upi or yourname@okaxis">
+          <span class="hint">Enter your BHIM UPI, Google Pay, PhonePe, or any UPI ID</span>
+        </div>
+        <button onclick="processPayment('upi')" class="btn-primary" style="width:100%;padding:1rem;font-size:1rem;">Pay via UPI 🔒</button>
+      </div>
+
+      <!-- QR Code Payment -->
+      <div id="qrPayment" class="payment-method">
+        <div class="qr-box">
+          <div class="payment-icon">📲</div>
+          <p style="font-weight:600;margin-bottom:0.5rem;">Scan & Pay</p>
+          <p style="color:#64748b;font-size:0.85rem;margin-bottom:1rem;">Open any UPI app and scan the QR code below to complete payment</p>
+          <div class="qr-img">
+            <img src="images/qr-code.svg" alt="QR Code for Payment">
+          </div>
+          <p style="font-size:0.8rem;color:#64748b;margin-top:0.75rem;">After scanning and paying, click the button below</p>
+          <button onclick="processPayment('qr')" class="btn-primary" style="margin-top:1rem;padding:1rem 2rem;">I've Completed Payment ✓</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>loadPaymentPage();</script>
+</body>
+</html>

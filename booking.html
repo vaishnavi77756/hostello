@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Hostel - Hostello</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="nav-brand">
+      <img src="images/logo-white.svg" alt="Hostello" class="nav-logo">Host<span>ello</span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="explore.html">Explore</a></li>
+      <li><a href="search-by-city.html">Cities</a></li>
+      <li><a href="about.html">About</a></li>
+      <li id="navProfileLink" style="display:none"><a href="profile.html">My Profile</a></li>
+      <li id="navLoginLink"><a href="student-login.html" class="btn-nav">Login</a></li>
+      <li id="navLogoutLink" style="display:none"><a href="#" onclick="logoutStudent()" class="btn-nav">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <h1>Book Your Hostel</h1>
+    <p>Fill in your details to complete the booking</p>
+  </div>
+
+  <div class="booking-page">
+    <div class="booking-grid">
+
+      <!-- Left: Form -->
+      <div class="booking-form-card">
+        <h2>📋 Booking Details</h2>
+        <form id="bookingForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkIn">Check-in Date</label>
+              <input type="date" id="checkIn" required>
+              <span class="hint">Select your arrival date</span>
+            </div>
+            <div class="form-group">
+              <label for="checkOut">Check-out Date</label>
+              <input type="date" id="checkOut" required>
+              <span class="hint">Select your departure date</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="guests">Number of Guests</label>
+            <input type="number" id="guests" min="1" max="10" value="1" required>
+            <span class="hint">How many people will be staying?</span>
+          </div>
+
+          <hr class="form-divider">
+          <div class="form-section-title">👤 Personal Information</div>
+
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" placeholder="Your full name" required>
+            <span class="hint">As per your ID proof</span>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" placeholder="10-digit number" required>
+            </div>
+          </div>
+
+          <button type="button" onclick="proceedToPayment()" class="btn-primary" style="width:100%;margin-top:1rem;padding:1rem;font-size:1rem;">
+            Proceed to Payment →
+          </button>
+        </form>
+      </div>
+
+      <!-- Right: Summary -->
+      <div class="booking-summary-card">
+        <h2>🏠 Hostel Summary</h2>
+        <div id="bookingSummary">
+          <p style="color:#64748b;font-size:0.9rem;">Loading hostel details...</p>
+        </div>
+        <div style="margin-top:1.5rem;padding:1rem;background:#f0f4ff;border-radius:8px;font-size:0.85rem;color:#4f46e5;">
+          ✅ Free cancellation within 24 hours<br>
+          🔒 Secure & encrypted payment<br>
+          📧 Instant booking confirmation
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>updateNavForLogin(); loadBookingPage();</script>
+</body>
+</html>

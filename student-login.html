@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login - Hostello</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="nav-brand">
+      <img src="images/logo-white.svg" alt="Hostello" class="nav-logo">Host<span>ello</span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="explore.html">Explore</a></li>
+      <li><a href="admin-login.html">Admin Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="auth-page">
+    <div class="auth-box">
+
+      <!-- LOGIN FORM -->
+      <div id="loginSection">
+        <h1>Welcome Back 👋</h1>
+        <p class="subtitle">Login to your Hostello student account</p>
+        <form id="studentLoginForm">
+          <div class="form-group">
+            <label for="studentEmail">Email Address</label>
+            <input type="email" id="studentEmail" placeholder="you@example.com" required>
+            <span class="hint">Enter the email you registered with</span>
+          </div>
+          <div class="form-group">
+            <label for="studentPassword">Password</label>
+            <input type="password" id="studentPassword" placeholder="Enter your password" required>
+          </div>
+          <button type="submit" class="btn-primary auth-submit">Login to Account</button>
+        </form>
+        <p class="form-link">Don't have an account? <a href="#" onclick="showRegister()">Create one</a></p>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div id="registerSection" style="display:none">
+        <h1>Create Account 🎓</h1>
+        <p class="subtitle">Join Hostello and find your perfect hostel</p>
+        <form id="studentRegisterForm">
+          <div class="form-section-title">👤 Personal Information</div>
+          <div class="form-group">
+            <label for="regName">Full Name</label>
+            <input type="text" id="regName" placeholder="e.g. Rahul Sharma" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regEmail">Email Address</label>
+              <input type="email" id="regEmail" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="regPhone">Phone Number</label>
+              <input type="tel" id="regPhone" placeholder="10-digit mobile number" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" placeholder="Minimum 6 characters" required>
+            <span class="hint">Use a strong password with letters and numbers</span>
+          </div>
+          <div class="form-group">
+            <label for="regCollege">College / University</label>
+            <input type="text" id="regCollege" placeholder="e.g. IIT Bombay" required>
+          </div>
+          <div class="form-group">
+            <label for="regIdProof">ID Proof (College ID / Aadhar)</label>
+            <input type="file" id="regIdProof" accept="image/*,.pdf">
+            <span class="hint">Upload a photo or PDF of your ID proof</span>
+          </div>
+
+          <hr class="form-divider">
+          <div class="form-section-title">💳 Payment Methods <span style="font-size:0.75rem;color:#64748b;font-weight:400">(Optional — can be added later)</span></div>
+
+          <div class="form-group">
+            <label for="regCard">Debit / Credit Card Number</label>
+            <input type="text" id="regCard" placeholder="16-digit card number" maxlength="16">
+            <span class="hint">Your card details are stored securely</span>
+          </div>
+          <div class="form-group">
+            <label for="regUpi">UPI ID</label>
+            <input type="text" id="regUpi" placeholder="e.g. yourname@upi">
+            <span class="hint">Enter your BHIM UPI or any UPI ID</span>
+          </div>
+
+          <button type="submit" class="btn-primary auth-submit">Create Account</button>
+          <button type="button" onclick="skipAndRegister()" class="btn-secondary auth-submit" style="margin-top:0.75rem;">Skip Payment Setup</button>
+        </form>
+        <p class="form-link">Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

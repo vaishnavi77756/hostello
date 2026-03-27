@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search by City - Hostello</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="nav-brand">
+      <img src="images/logo-white.svg" alt="Hostello" class="nav-logo">Host<span>ello</span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="explore.html">Explore</a></li>
+      <li><a href="search-by-city.html" class="active">Cities</a></li>
+      <li><a href="about.html">About</a></li>
+      <li id="navProfileLink" style="display:none"><a href="profile.html">My Profile</a></li>
+      <li id="navLoginLink"><a href="student-login.html" class="btn-nav">Login</a></li>
+      <li id="navLogoutLink" style="display:none"><a href="#" onclick="logoutStudent()" class="btn-nav">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <h1>Search by City</h1>
+    <p>Choose a city to explore available hostels</p>
+  </div>
+
+  <div class="cities-grid">
+    <div class="city-card" onclick="searchCity('mumbai')">
+      <span class="city-emoji">🌊</span>
+      <h3>Mumbai</h3>
+      <p>Financial Capital</p>
+    </div>
+    <div class="city-card" onclick="searchCity('delhi')">
+      <span class="city-emoji">🏛️</span>
+      <h3>Delhi</h3>
+      <p>National Capital</p>
+    </div>
+    <div class="city-card" onclick="searchCity('bangalore')">
+      <span class="city-emoji">💻</span>
+      <h3>Bangalore</h3>
+      <p>Silicon Valley of India</p>
+    </div>
+    <div class="city-card" onclick="searchCity('pune')">
+      <span class="city-emoji">🎓</span>
+      <h3>Pune</h3>
+      <p>Oxford of the East</p>
+    </div>
+    <div class="city-card" onclick="searchCity('hyderabad')">
+      <span class="city-emoji">🍛</span>
+      <h3>Hyderabad</h3>
+      <p>City of Pearls</p>
+    </div>
+    <div class="city-card" onclick="searchCity('chennai')">
+      <span class="city-emoji">🎭</span>
+      <h3>Chennai</h3>
+      <p>Gateway of South India</p>
+    </div>
+    <div class="city-card" onclick="searchCity('kolkata')">
+      <span class="city-emoji">🎨</span>
+      <h3>Kolkata</h3>
+      <p>City of Joy</p>
+    </div>
+    <div class="city-card" onclick="searchCity('jaipur')">
+      <span class="city-emoji">🏰</span>
+      <h3>Jaipur</h3>
+      <p>Pink City</p>
+    </div>
+    <div class="city-card" onclick="searchCity('ahmedabad')">
+      <span class="city-emoji">🏗️</span>
+      <h3>Ahmedabad</h3>
+      <p>Manchester of India</p>
+    </div>
+    <div class="city-card" onclick="searchCity('surat')">
+      <span class="city-emoji">💎</span>
+      <h3>Surat</h3>
+      <p>Diamond City</p>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>updateNavForLogin();</script>
+</body>
+</html>

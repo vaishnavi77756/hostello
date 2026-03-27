@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Hostels - Hostello</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="nav-brand">
+      <img src="images/logo-white.svg" alt="Hostello" class="nav-logo">Host<span>ello</span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="explore.html" class="active">Explore</a></li>
+      <li><a href="search-by-city.html">Cities</a></li>
+      <li><a href="about.html">About</a></li>
+      <li id="navProfileLink" style="display:none"><a href="profile.html">My Profile</a></li>
+      <li id="navLoginLink"><a href="student-login.html" class="btn-nav">Login</a></li>
+      <li id="navLogoutLink" style="display:none"><a href="#" onclick="logoutStudent()" class="btn-nav">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <h1>Explore Hostels</h1>
+    <p>Browse all available hostels and find your perfect match</p>
+  </div>
+
+  <div class="filters-bar">
+    <div class="filter-group">
+      <label>City</label>
+      <select id="cityFilter" onchange="filterHostels()">
+        <option value="">All Cities</option>
+        <option value="mumbai">Mumbai</option>
+        <option value="delhi">Delhi</option>
+        <option value="bangalore">Bangalore</option>
+        <option value="pune">Pune</option>
+        <option value="hyderabad">Hyderabad</option>
+        <option value="chennai">Chennai</option>
+        <option value="kolkata">Kolkata</option>
+        <option value="jaipur">Jaipur</option>
+        <option value="ahmedabad">Ahmedabad</option>
+        <option value="surat">Surat</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Price Range</label>
+      <select id="priceFilter" onchange="filterHostels()">
+        <option value="">All Prices</option>
+        <option value="low">Under ₹5,000/mo</option>
+        <option value="mid">₹5,000 – ₹10,000/mo</option>
+        <option value="high">Above ₹10,000/mo</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Sort By</label>
+      <select id="sortFilter" onchange="filterHostels()">
+        <option value="">Default</option>
+        <option value="price_asc">Price: Low to High</option>
+        <option value="price_desc">Price: High to Low</option>
+        <option value="rating">Top Rated</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="hostels-grid" id="hostelsGrid">
+    <p style="color:#64748b;padding:2rem;">Loading hostels...</p>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>updateNavForLogin(); loadHostels();</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results - Hostello</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="nav-brand">
+      <img src="images/logo-white.svg" alt="Hostello" class="nav-logo">Host<span>ello</span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="explore.html">Explore</a></li>
+      <li><a href="search-by-city.html">Cities</a></li>
+      <li><a href="about.html">About</a></li>
+      <li id="navProfileLink" style="display:none"><a href="profile.html">My Profile</a></li>
+      <li id="navLoginLink"><a href="student-login.html" class="btn-nav">Login</a></li>
+      <li id="navLogoutLink" style="display:none"><a href="#" onclick="logoutStudent()" class="btn-nav">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <h1>Search Results</h1>
+    <p>Find the hostel that's right for you</p>
+  </div>
+
+  <div class="search-page">
+    <div class="search-header">
+      <div class="search-input-bar">
+        <input type="text" id="searchInput" placeholder="Search by city, hostel name or address...">
+        <button onclick="performSearch()">🔍 Search</button>
+      </div>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p style="color:#64748b;">Enter a search term above to find hostels.</p>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>updateNavForLogin(); loadSearchResults();</script>
+</body>
+</html>
