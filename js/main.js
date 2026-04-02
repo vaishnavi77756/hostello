@@ -60,19 +60,35 @@ function logoutStudent() {
 async function loadHostels() {
   const grid = document.getElementById('hostelsGrid');
   if (!grid) return;
+  grid.innerHTML = '<p style="padding:2rem;color:#64748b;text-align:center;">⏳ Loading hostels...</p>';
   try {
     const city = localStorage.getItem('searchCity') || '';
     localStorage.removeItem('searchCity');
     const url = city ? `${API_URL}/hostels?city=${city}` : `${API_URL}/hostels`;
     const res = await fetch(url);
+    if (!res.ok) throw new Error('Server error');
     const hostels = await res.json();
     if (city) {
       const el = document.getElementById('cityFilter');
       if (el) el.value = city;
     }
-    grid.innerHTML = hostels.length ? hostels.map(hostelCard).join('') : '<p style="padding:2rem;color:#64748b;">No hostels found.</p>';
+    if (!Array.isArray(hostels) || hostels.length === 0) {
+      grid.innerHTML = `
+        <div style="grid-column:1/-1;text-align:center;padding:3rem;">
+          <div style="font-size:3rem;margin-bottom:1rem;">🏠</div>
+          <p style="color:#64748b;font-size:1rem;">No hostels found. The database may still be loading.</p>
+          <button onclick="loadHostels()" class="btn-primary" style="margin-top:1rem;">🔄 Try Again</button>
+        </div>`;
+      return;
+    }
+    grid.innerHTML = hostels.map(hostelCard).join('');
   } catch (e) {
-    grid.innerHTML = '<p style="padding:2rem;color:#ef4444;">Failed to load hostels. Is the server running?</p>';
+    grid.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:3rem;">
+        <div style="font-size:3rem;margin-bottom:1rem;">⚠️</div>
+        <p style="color:#ef4444;font-size:1rem;">Could not connect to server. It may be waking up (free tier takes ~30 sec).</p>
+        <button onclick="loadHostels()" class="btn-primary" style="margin-top:1rem;">🔄 Retry</button>
+      </div>`;
   }
 }
 
