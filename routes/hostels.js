@@ -48,6 +48,28 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// GET room availability for a hostel
+router.get('/:id/availability', async (req, res) => {
+    try {
+        const hostel = await Hostel.findById(req.params.id);
+        if (!hostel) return res.status(404).json({ message: 'Hostel not found' });
+        const bookedRooms = hostel.totalBookings || 0;
+        const totalRooms = hostel.totalRooms || 20;
+        const availableRooms = Math.max(0, totalRooms - bookedRooms);
+        res.json({
+            hostelId: hostel._id,
+            hostelName: hostel.name,
+            totalRooms,
+            bookedRooms,
+            availableRooms,
+            occupancyPercent: Math.round((bookedRooms / totalRooms) * 100),
+            available: availableRooms > 0
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+});
+
 // POST create hostel
 router.post('/', async (req, res) => {
     try {

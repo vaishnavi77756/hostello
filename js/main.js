@@ -1,5 +1,5 @@
 const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? 'http://localhost:3000/api'
+  ? `http://${window.location.hostname}:3000/api`
   : 'https://hostello.onrender.com/api';
 
 // ── HELPERS ──
@@ -14,15 +14,20 @@ function showToast(msg, type = 'success') {
 
 function hostelCard(hostel) {
   const city = hostel.city.charAt(0).toUpperCase() + hostel.city.slice(1);
+  const available = hostel.availableRooms !== undefined ? hostel.availableRooms : Math.max(0, (hostel.totalRooms || 20) - (hostel.totalBookings || 0));
+  const total = hostel.totalRooms || 20;
+  const roomsClass = available === 0 ? 'none' : available <= 3 ? 'low' : '';
+  const roomsText = available === 0 ? '🔴 Fully Booked' : available <= 3 ? `⚠️ Only ${available} rooms left` : `✅ ${available} rooms available`;
   return `
     <div class="hostel-card" onclick="viewHostel('${hostel._id}')">
       <div class="hostel-image">
         🏠
-        <span class="hostel-badge">Available</span>
+        ${available === 0 ? '<span class="hostel-badge" style="background:#ef4444;">Full</span>' : '<span class="hostel-badge">Available</span>'}
       </div>
       <div class="hostel-info">
         <h3>${hostel.name}</h3>
         <div class="hostel-meta">📍 ${city} &nbsp;·&nbsp; ${hostel.address.split(',')[0]}</div>
+        <div class="rooms-left ${roomsClass}">${roomsText}</div>
         <div class="hostel-footer">
           <div class="price">₹${hostel.price.toLocaleString()}<span>/mo</span></div>
           <div class="rating">⭐ ${hostel.rating}</div>
@@ -124,10 +129,22 @@ async function loadHostelDetails() {
   const id = localStorage.getItem('selectedHostel');
   if (!id) return;
   try {
-    const res = await fetch(`${API_URL}/hostels/${id}`);
-    const h = await res.json();
+    const [hostelRes, availRes] = await Promise.all([
+      fetch(`${API_URL}/hostels/${id}`),
+      fetch(`${API_URL}/hostels/${id}/availability`)
+    ]);
+    const h = await hostelRes.json();
+    const avail = await availRes.json();
+
     document.title = `${h.name} - Hostello`;
+
     const amenityIcons = { WiFi:'📶', AC:'❄️', Gym:'💪', Mess:'🍽️', Kitchen:'🍳', Laundry:'👕', Security:'🔒', Parking:'🚗', Cafeteria:'☕', 'Study Room':'📚', Garden:'🌿', Rooftop:'🌇', Pool:'🏊', CCTV:'📹', Recreation:'🎮', 'Common Room':'🛋️', '24/7 Security':'🛡️' };
+
+    const occupancy = avail.occupancyPercent || 0;
+    const fillClass = occupancy >= 90 ? 'high' : occupancy >= 60 ? 'mid' : 'low';
+    const statusClass = avail.availableRooms === 0 ? 'full' : avail.availableRooms <= 3 ? 'limited' : 'open';
+    const statusText = avail.availableRooms === 0 ? '🔴 Fully Booked' : avail.availableRooms <= 3 ? `⚠️ Only ${avail.availableRooms} rooms left — Book fast!` : `✅ ${avail.availableRooms} rooms available`;
+
     document.getElementById('hostelDetail').innerHTML = `
       <div class="hostel-gallery">
         <div class="gallery-main">🏠</div>
@@ -142,34 +159,75 @@ async function loadHostelDetails() {
           <div class="detail-meta">
             <span>📍 ${h.city.charAt(0).toUpperCase()+h.city.slice(1)}</span>
             <span>⭐ ${h.rating} Rating</span>
-            <span>✅ Available</span>
+            <span>✅ Verified</span>
           </div>
+
           <div class="detail-section">
             <h3>About this Hostel</h3>
             <p style="color:#64748b;line-height:1.8;">${h.description}</p>
           </div>
+
           <div class="detail-section">
             <h3>Full Address</h3>
             <p style="color:#64748b;">📍 ${h.address}</p>
           </div>
+
           <div class="detail-section">
             <h3>Amenities</h3>
             <div class="amenities-grid">
               ${h.amenities.map(a => `<div class="amenity-chip">${amenityIcons[a]||'✓'} ${a}</div>`).join('')}
             </div>
           </div>
+
+          <!-- AVAILABILITY WIDGET -->
+          <div class="availability-box">
+            <h3>🏠 Room Availability</h3>
+            <div class="rooms-stats">
+              <div class="room-stat total">
+                <div class="room-stat-number">${avail.totalRooms}</div>
+                <div class="room-stat-label">Total Rooms</div>
+              </div>
+              <div class="room-stat booked">
+                <div class="room-stat-number">${avail.bookedRooms}</div>
+                <div class="room-stat-label">Booked</div>
+              </div>
+              <div class="room-stat available">
+                <div class="room-stat-number">${avail.availableRooms}</div>
+                <div class="room-stat-label">Available</div>
+              </div>
+            </div>
+            <div class="occupancy-bar-wrap">
+              <div class="occupancy-label">
+                <span>Occupancy</span>
+                <span>${occupancy}% filled</span>
+              </div>
+              <div class="occupancy-bar">
+                <div class="occupancy-fill ${fillClass}" style="width:${occupancy}%"></div>
+              </div>
+            </div>
+            <span class="availability-status ${statusClass}">${statusText}</span>
+          </div>
         </div>
+
         <div class="detail-sidebar">
           <div class="sidebar-price">₹${h.price.toLocaleString()}<span>/month</span></div>
           <div class="sidebar-rating">⭐ ${h.rating} &nbsp;·&nbsp; Verified Hostel</div>
-          <button class="btn-primary sidebar-book" onclick="bookHostel('${h._id}')">Book Now →</button>
+          <div style="font-size:0.85rem;margin-bottom:1rem;padding:0.6rem 0.75rem;border-radius:6px;background:${avail.availableRooms===0?'#fee2e2':avail.availableRooms<=3?'#fef3c7':'#d1fae5'};color:${avail.availableRooms===0?'#991b1b':avail.availableRooms<=3?'#92400e':'#065f46'};font-weight:600;">
+            ${avail.availableRooms === 0 ? '🔴 No rooms available' : avail.availableRooms <= 3 ? `⚠️ Only ${avail.availableRooms} left` : `✅ ${avail.availableRooms} rooms free`}
+          </div>
+          <button class="btn-primary sidebar-book" onclick="bookHostel('${h._id}')" ${avail.availableRooms === 0 ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''}>
+            ${avail.availableRooms === 0 ? 'Fully Booked' : 'Book Now →'}
+          </button>
           <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #e2e8f0;">
             <p style="font-size:0.85rem;color:#64748b;margin-bottom:0.5rem;">📍 ${h.address}</p>
             <p style="font-size:0.85rem;color:#64748b;">🏙️ ${h.city.charAt(0).toUpperCase()+h.city.slice(1)}</p>
           </div>
         </div>
       </div>`;
-  } catch (e) { console.error(e); }
+  } catch (e) {
+    console.error(e);
+    document.getElementById('hostelDetail').innerHTML = '<p style="color:#ef4444;padding:2rem;">Failed to load hostel details.</p>';
+  }
 }
 
 // ── BOOK HOSTEL ──

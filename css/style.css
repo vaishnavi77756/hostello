@@ -558,3 +558,114 @@ body {
   .admin-sidebar { width: 100%; }
   .form-row { grid-template-columns: 1fr; }
 }
+
+/* ── ROOM AVAILABILITY ── */
+.availability-box {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  margin-top: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.availability-box h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rooms-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.room-stat {
+  text-align: center;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+}
+
+.room-stat.total { background: #f0f4ff; }
+.room-stat.booked { background: #fff1f2; }
+.room-stat.available { background: #f0fdf4; }
+
+.room-stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.room-stat.total .room-stat-number { color: var(--primary); }
+.room-stat.booked .room-stat-number { color: var(--danger); }
+.room-stat.available .room-stat-number { color: var(--success); }
+
+.room-stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray);
+}
+
+.occupancy-bar-wrap {
+  margin-bottom: 0.5rem;
+}
+
+.occupancy-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--gray);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.occupancy-bar {
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.occupancy-fill {
+  height: 100%;
+  border-radius: 50px;
+  transition: width 0.6s ease;
+}
+
+.occupancy-fill.low { background: var(--success); }
+.occupancy-fill.mid { background: var(--accent); }
+.occupancy-fill.high { background: var(--danger); }
+
+.availability-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-top: 0.75rem;
+}
+
+.availability-status.open { background: #d1fae5; color: #065f46; }
+.availability-status.limited { background: #fef3c7; color: #92400e; }
+.availability-status.full { background: #fee2e2; color: #991b1b; }
+
+/* Hostel card availability badge */
+.rooms-left {
+  font-size: 0.78rem;
+  color: var(--success);
+  font-weight: 600;
+  margin-top: 4px;
+}
+.rooms-left.low { color: var(--accent); }
+.rooms-left.none { color: var(--danger); }

@@ -27,7 +27,8 @@ app.use('/api/bookings', require('./routes/bookings'));
 app.use('/api/payments', require('./routes/payments'));
 app.use('/api/admin', require('./routes/admin'));
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+const PORT = 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
+});;
