@@ -14,20 +14,40 @@ function showToast(msg, type = 'success') {
 
 function hostelCard(hostel) {
   const city = hostel.city.charAt(0).toUpperCase() + hostel.city.slice(1);
-  const available = hostel.availableRooms !== undefined ? hostel.availableRooms : Math.max(0, (hostel.totalRooms || 20) - (hostel.totalBookings || 0));
   const total = hostel.totalRooms || 20;
-  const roomsClass = available === 0 ? 'none' : available <= 3 ? 'low' : '';
-  const roomsText = available === 0 ? '🔴 Fully Booked' : available <= 3 ? `⚠️ Only ${available} rooms left` : `✅ ${available} rooms available`;
+  const booked = hostel.totalBookings || 0;
+  const available = Math.max(0, total - booked);
+  const occupancy = Math.round((booked / total) * 100);
+  const fillColor = available === 0 ? '#ef4444' : available <= 3 ? '#f59e0b' : '#10b981';
+  const statusText = available === 0 ? '🔴 Fully Booked' : available <= 3 ? `⚠️ ${available} left` : `✅ ${available} available`;
+  const statusBg = available === 0 ? '#fee2e2' : available <= 3 ? '#fef3c7' : '#d1fae5';
+  const statusColor = available === 0 ? '#991b1b' : available <= 3 ? '#92400e' : '#065f46';
+
   return `
     <div class="hostel-card" onclick="viewHostel('${hostel._id}')">
       <div class="hostel-image">
         🏠
-        ${available === 0 ? '<span class="hostel-badge" style="background:#ef4444;">Full</span>' : '<span class="hostel-badge">Available</span>'}
+        <span class="hostel-badge" style="background:${fillColor};">${available === 0 ? 'Full' : 'Open'}</span>
       </div>
       <div class="hostel-info">
         <h3>${hostel.name}</h3>
         <div class="hostel-meta">📍 ${city} &nbsp;·&nbsp; ${hostel.address.split(',')[0]}</div>
-        <div class="rooms-left ${roomsClass}">${roomsText}</div>
+
+        <!-- Room Availability Bar -->
+        <div style="margin:0.75rem 0 0.5rem;">
+          <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:#64748b;margin-bottom:4px;">
+            <span>🛏️ Rooms</span>
+            <span style="font-weight:600;color:${fillColor};">${statusText}</span>
+          </div>
+          <div style="height:6px;background:#e2e8f0;border-radius:50px;overflow:hidden;">
+            <div style="height:100%;width:${occupancy}%;background:${fillColor};border-radius:50px;transition:width 0.5s;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:#94a3b8;margin-top:3px;">
+            <span>${booked} booked</span>
+            <span>${available}/${total} free</span>
+          </div>
+        </div>
+
         <div class="hostel-footer">
           <div class="price">₹${hostel.price.toLocaleString()}<span>/mo</span></div>
           <div class="rating">⭐ ${hostel.rating}</div>

@@ -13,8 +13,16 @@ router.get('/', async (req, res) => {
             if (minPrice) query.price.$gte = Number(minPrice);
             if (maxPrice) query.price.$lte = Number(maxPrice);
         }
-        const hostels = await Hostel.find(query);
-        res.json(hostels);
+        const hostels = await Hostel.find(query).lean();
+        // Attach computed availability to each hostel
+        const result = hostels.map(h => ({
+            ...h,
+            totalRooms: h.totalRooms || 20,
+            bookedRooms: h.totalBookings || 0,
+            availableRooms: Math.max(0, (h.totalRooms || 20) - (h.totalBookings || 0)),
+            occupancyPercent: Math.round(((h.totalBookings || 0) / (h.totalRooms || 20)) * 100)
+        }));
+        res.json(result);
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
